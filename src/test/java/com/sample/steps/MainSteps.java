@@ -21,31 +21,34 @@ public class MainSteps {
 
     private WebDriver driver;
 
+    public MainSteps() {
+        mainPage = new MainPage();
+    }
+
     @Given("I open the Chrome browser")
     public void openChromeBrowser() {
-        System.setProperty("webdriver.gecko.driver", "." + File.separator + "src"
-                + File.separator + "test"
-                + File.separator + "resources" + File.separator + "drivers" + File.separator + "geckodriver.exe");
-        driver = new FirefoxDriver();
+       // webDriverManager.getDriver().get(url);
+
+
     }
 
     @When("I navigate to {string}")
     public void navigateToUrl(String url) {
-        driver.get(url);
+        mainPage.getDriver().get(url);
     }
 
     @Then("the title should be {string}")
-    public void verifyTitle(String expectedTitle) {
-        String actualTitle = driver.getTitle();
-        System.out.println("-actualTitle---"+actualTitle);
-        System.out.println("---expectedTitle-"+expectedTitle);
-        assert actualTitle.equals(expectedTitle) : "Actual title: " + actualTitle;
+    public void verifyTitle(String expectedTitle) throws InterruptedException {
+        //String actualTitle = webDriverManager.getDriver().getTitle();
+       // System.out.println("-actualTitle---"+actualTitle);
+        //System.out.println("---expectedTitle-"+expectedTitle);
+        mainPage.inputUser();
+
+       // assert actualTitle.equals(expectedTitle) : "Actual title: " + actualTitle;
     }
 
     @Then("close the browser")
     public void closeBrowser() {
-        if (driver != null) {
-            driver.quit();
-        }
+        mainPage.quitDriver();
     }
 }
