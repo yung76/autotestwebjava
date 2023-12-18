@@ -5,6 +5,7 @@ import com.sample.pages.WebDriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -42,12 +43,13 @@ public class MainSteps {
 
     @Then("select first product of result search")
     public void verifyTitle() throws InterruptedException {
-        mainPage.inputUser();
+        mainPage.clickFirstProductList();
     }
 
-    @Then("search a product")
-    public void searchProduct() {
-       //
+    @And("search a product {string}")
+    public void searchProduct(String product) {
+
+       mainPage.setInputSearch(product);
     }
 
     @After
