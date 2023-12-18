@@ -2,8 +2,10 @@
 
 Feature: Sample Feature
 
-  Scenario: Verify title of the website
-    Given I open the Chrome browser
+  Scenario: Verify search a product
+    Given I open the Firefox browser
     When I navigate to "https://takanodan.cl/"
+    And search a product
+    And select first product of result search
     Then the title should be "Example Domain"
     And close the browser
