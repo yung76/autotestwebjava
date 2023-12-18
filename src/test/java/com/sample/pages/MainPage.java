@@ -40,7 +40,7 @@ public class MainPage extends WebDriverManager{
         logger.info("Funco");
     }
 
-    public void setInputSearch(String search) {
+    public void setInputSearch(String search) throws InterruptedException {
         logger.info("Buscando btnSearch");
         waitForElementToBeVisible(btnSearch);
         btnSearch.click();
@@ -50,6 +50,7 @@ public class MainPage extends WebDriverManager{
         inputSearch.sendKeys(search);
         logger.info("Presione enter");
         inputSearch.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
     }
 
     public void clickFirstProductList() {

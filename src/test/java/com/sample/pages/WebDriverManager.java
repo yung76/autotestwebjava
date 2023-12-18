@@ -23,6 +23,7 @@ public class WebDriverManager {
                     + File.separator + "test"
                     + File.separator + "resources" + File.separator + "drivers" + File.separator + "geckodriver.exe");
             driver = new FirefoxDriver();
+            driver.manage().window().maximize();
         }
         return driver;
     }

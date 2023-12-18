@@ -47,7 +47,7 @@ public class MainSteps {
     }
 
     @And("search a product {string}")
-    public void searchProduct(String product) {
+    public void searchProduct(String product) throws InterruptedException {
 
        mainPage.setInputSearch(product);
     }
