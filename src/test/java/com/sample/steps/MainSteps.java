@@ -11,6 +11,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -50,6 +51,26 @@ public class MainSteps {
     public void searchProduct(String product) throws InterruptedException {
 
        mainPage.setInputSearch(product);
+    }
+
+    @And("write username {string}")
+    public void writeUsername(String username) throws InterruptedException {
+       mainPage.setInputUsername(username);
+    }
+
+    @And("write password {string}")
+    public void writePassword(String password) throws InterruptedException {
+       mainPage.setInputPassword(password);
+    }
+
+    @Then("click in login button")
+    public void loginButton() throws InterruptedException {
+       mainPage.hacerLogin();
+    }
+
+    @Then("validated entry home page")
+    public void validatedEntryHomePage() throws InterruptedException {
+       Assert.assertTrue("No se mostrado el home",mainPage.booleanBtnDashboard());
     }
 
     @After

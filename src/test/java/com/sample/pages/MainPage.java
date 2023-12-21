@@ -13,7 +13,7 @@ public class MainPage extends WebDriverManager{
     private static final Logger logger =  LogManager.getLogger(MainPage.class);
     // Constructor
     public MainPage() {
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(   getDriver(), this);
     }
 
     // Elementos de la página con @FindBy
@@ -31,6 +31,18 @@ public class MainPage extends WebDriverManager{
 
     @FindBy(xpath = "(//div[@class=\"product-meta\"])[1]")
     WebElement firstProductList;
+
+    @FindBy(xpath = "//input[@name=\"username\"]")
+    WebElement inputUsername;
+
+    @FindBy(xpath = "//input[@name=\"password\"]")
+    WebElement inputPassword;
+
+    @FindBy(xpath = "//button[contains(@class,'login-button')]")
+    WebElement btnLogin;
+
+    @FindBy(id = "path0")
+    WebElement btnDashboard;
 
     // Métodos para interactuar con los elementos
     public void inputUser() throws InterruptedException {
@@ -53,14 +65,40 @@ public class MainPage extends WebDriverManager{
         Thread.sleep(5000);
     }
 
-    public void clickFirstProductList() {
-
-        logger.info("Buscando firstProductList");
-        waitForElementToBeVisible(firstProductList);
-        firstProductList.click();
+    public void setInputUsername(String username) throws InterruptedException {
+        logger.info("Buscando inputUsername");
+        waitForElementToBeVisible(inputUsername);
+        logger.info("Ingresando el siguiente usuario " + username);
+        inputUsername.sendKeys(username);
+        Thread.sleep(2000);
     }
 
-    public void hacerLogin() {
-        loginButton.click();
+    public void setInputPassword(String password) throws InterruptedException {
+        logger.info("Buscando inputPassword");
+        waitForElementToBeVisible(inputPassword);
+        logger.info("Ingresando el siguiente password " + password);
+        inputPassword.sendKeys(password);
+        Thread.sleep(2000);
+    }
+
+    public void clickFirstProductList() throws InterruptedException {
+        logger.info("Buscando firstProductList");
+        waitForElementToBeVisible(firstProductList);
+        logger.info("Click firstProductList");
+        firstProductList.click();
+        Thread.sleep(5000);
+    }
+
+    public boolean booleanBtnDashboard() throws InterruptedException {
+        logger.info("Buscando btnDashboard");
+        waitForElementToBeVisible(btnDashboard);
+        Thread.sleep(2000);
+        return btnDashboard.isDisplayed();
+    }
+
+    public void hacerLogin() throws InterruptedException {
+        logger.info("Click en btnLogin");
+        btnLogin.click();
+        Thread.sleep(2000);
     }
 }
