@@ -41,6 +41,24 @@ public class MainPage extends WebDriverManager{
     @FindBy(xpath = "//button[contains(@class,'login-button')]")
     WebElement btnLogin;
 
+    @FindBy(xpath = "//span[text()='PIM']/..")
+    WebElement btnPIM;
+
+    @FindBy(xpath = "//button[text()=\" Add \"]")
+    WebElement btnAddNewEmployee;
+
+    @FindBy(xpath = "//input[@name=\"firstName\"]")
+    WebElement inputFirstName;
+
+    @FindBy(xpath = "//input[@name=\"middleName\"]")
+    WebElement inputMiddleName;
+
+    @FindBy(xpath = "//input[@name=\"lastName\"]")
+    WebElement inputLastName;
+
+    @FindBy(xpath = "//button[text()=\" Save \"]")
+    WebElement btnSaveEmployee;
+
     @FindBy(id = "path0")
     WebElement btnDashboard;
 
@@ -81,6 +99,28 @@ public class MainPage extends WebDriverManager{
         Thread.sleep(2000);
     }
 
+    public void setInputFirstName(String firstName) throws InterruptedException {
+        logger.info("Buscando firstName");
+        waitForElementToBeVisible(inputFirstName);
+        logger.info("Ingresando el siguiente firstName " + firstName);
+        inputFirstName.sendKeys(firstName);
+    }
+
+    public void setInputLastName(String lastName) throws InterruptedException {
+        logger.info("Buscando inputLastName");
+        waitForElementToBeVisible(inputLastName);
+        logger.info("Ingresando el siguiente inputLastName " + lastName);
+        inputLastName.sendKeys(lastName);
+        Thread.sleep(5000);
+    }
+
+    public void setInputMiddleName(String middleName) throws InterruptedException {
+        logger.info("Buscando middleName");
+        waitForElementToBeVisible(inputMiddleName);
+        logger.info("Ingresando el siguiente middleName " + middleName);
+        inputMiddleName.sendKeys(middleName);
+    }
+
     public void clickFirstProductList() throws InterruptedException {
         logger.info("Buscando firstProductList");
         waitForElementToBeVisible(firstProductList);
@@ -101,4 +141,24 @@ public class MainPage extends WebDriverManager{
         btnLogin.click();
         Thread.sleep(2000);
     }
+
+    public void clickBtnPIM() throws InterruptedException {
+        waitForElementToBeVisible(btnPIM);
+        logger.info("Click en btnPIM");
+        btnPIM.click();
+    }
+
+    public void clickBtnAddEmployee() throws InterruptedException {
+        waitForElementToBeVisible(btnAddNewEmployee);
+        logger.info("Click en btnAddNewEmployee");
+        btnAddNewEmployee.click();
+    }
+
+    public void clickBtnSaveEmployee() throws InterruptedException {
+        waitForElementToBeVisible(btnSaveEmployee);
+        logger.info("Click en btnSaveEmployee");
+        btnSaveEmployee.click();
+        Thread.sleep(5000);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.sample.steps;
 
 import com.sample.pages.MainPage;
 import com.sample.pages.WebDriverManager;
+import com.sample.utils.RandomGenerator;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -27,6 +28,7 @@ public class MainSteps {
     private WebDriverManager webDriverManager;
 
     private WebDriver driver;
+    RandomGenerator randomGenerator = new RandomGenerator();
 
     public MainSteps() {
         mainPage = new MainPage();
@@ -60,7 +62,22 @@ public class MainSteps {
 
     @And("write password {string}")
     public void writePassword(String password) throws InterruptedException {
-       mainPage.setInputPassword(password);
+        mainPage.setInputPassword(password);
+    }
+
+    @And("go to PIM section")
+    public void goToPIMSection() throws InterruptedException {
+        mainPage.clickBtnPIM();
+    }
+
+    @And("add new employee")
+    public void addNewEmployee() throws InterruptedException {
+        mainPage.clickBtnAddEmployee();
+        mainPage.setInputFirstName(randomGenerator.generateRandomText(4));
+        mainPage.setInputMiddleName(randomGenerator.generateRandomText(4));
+        mainPage.setInputLastName(randomGenerator.generateRandomText(4));
+        mainPage.clickBtnSaveEmployee();
+
     }
 
     @Then("click in login button")
@@ -70,6 +87,11 @@ public class MainSteps {
 
     @Then("validated entry home page")
     public void validatedEntryHomePage() throws InterruptedException {
+       Assert.assertTrue("No se mostrado el home",mainPage.booleanBtnDashboard());
+    }
+
+    @Then("employee add success")
+    public void employeeAddSuccess() throws InterruptedException {
        Assert.assertTrue("No se mostrado el home",mainPage.booleanBtnDashboard());
     }
 
