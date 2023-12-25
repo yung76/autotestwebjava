@@ -59,6 +59,9 @@ public class MainPage extends WebDriverManager{
     @FindBy(xpath = "//button[text()=\" Save \"]")
     WebElement btnSaveEmployee;
 
+    @FindBy(xpath = "//a[text()=\"Personal Details\"]")
+    WebElement btnMenuPersonalDetails;
+
     @FindBy(id = "path0")
     WebElement btnDashboard;
 
@@ -136,6 +139,13 @@ public class MainPage extends WebDriverManager{
         return btnDashboard.isDisplayed();
     }
 
+    public boolean booleanBtnMenuPersonalDetails() throws InterruptedException {
+        logger.info("Buscando btnMenuPersonalDetails");
+        waitForElementToBeVisible(btnMenuPersonalDetails);
+        Thread.sleep(2000);
+        return btnMenuPersonalDetails.isDisplayed();
+    }
+
     public void hacerLogin() throws InterruptedException {
         logger.info("Click en btnLogin");
         btnLogin.click();
@@ -158,6 +168,13 @@ public class MainPage extends WebDriverManager{
         waitForElementToBeVisible(btnSaveEmployee);
         logger.info("Click en btnSaveEmployee");
         btnSaveEmployee.click();
+        Thread.sleep(5000);
+    }
+
+    public void clickBtnMenuPersonalDetails() throws InterruptedException {
+        waitForElementToBeVisible(btnMenuPersonalDetails, 5);
+        logger.info("Click en btnMenuPersonalDetails");
+        btnMenuPersonalDetails.click();
         Thread.sleep(5000);
     }
 

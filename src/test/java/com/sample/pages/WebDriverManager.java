@@ -35,6 +35,12 @@ public class WebDriverManager {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    protected void waitForElementToBeVisible(WebElement element, int time) {
+        logger.info("Buscando elemento");
+        WebDriverWait wait = new WebDriverWait(driver, time);
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
     public void quitDriver() {
         // Cierra el navegador y establece el driver a null
         if (driver != null) {
