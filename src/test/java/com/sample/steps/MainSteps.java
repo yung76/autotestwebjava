@@ -70,6 +70,18 @@ public class MainSteps {
         mainPage.clickBtnPIM();
     }
 
+    @And("go to emergency contact")
+    public void goToEmergencyContactSection() throws InterruptedException {
+        mainPage.booleanBtnMenuPersonalDetails();
+        mainPage.clickBtnEmergencyContact();
+    }
+
+    @And("go to salary")
+    public void goToSalary() throws InterruptedException {
+        mainPage.booleanBtnMenuPersonalDetails();
+        mainPage.clickBtnSalary();
+    }
+
     @And("add new employee")
     public void addNewEmployee() throws InterruptedException {
         mainPage.clickBtnAddEmployee();
@@ -78,6 +90,23 @@ public class MainSteps {
         mainPage.setInputLastName(randomGenerator.generateRandomText(4));
         mainPage.clickBtnSaveEmployee();
 
+    }
+
+    @And("add new emergency contact")
+    public void addNewEmergencyContact() throws InterruptedException {
+        mainPage.clickBtnAddEmergencyContact();
+        mainPage.setInputNameEmergencyContact(randomGenerator.generateRandomText(4));
+        mainPage.setInputRelationshipEmergencyContact(randomGenerator.generateRandomText(4));
+        mainPage.setInputPhoneEmergencyContact(randomGenerator.generateRandomNumber(8));
+        mainPage.clickBtnSaveEmployee();
+    }
+
+    @Then("add salary component")
+    public void addSalary() throws InterruptedException {
+        mainPage.clickBtnAddEmployee();
+        mainPage.setInputSalaryComponent(randomGenerator.generateRandomNumber(6));
+        // combox box
+        mainPage.clickBtnSaveEmployee();
     }
 
     @Then("click in login button")

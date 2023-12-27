@@ -7,13 +7,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class MainPage extends WebDriverManager{
 
     private static final Logger logger =  LogManager.getLogger(MainPage.class);
     // Constructor
     public MainPage() {
-        PageFactory.initElements(   getDriver(), this);
+        PageFactory.initElements( getDriver(), this);
     }
 
     // Elementos de la página con @FindBy
@@ -56,11 +57,38 @@ public class MainPage extends WebDriverManager{
     @FindBy(xpath = "//input[@name=\"lastName\"]")
     WebElement inputLastName;
 
+    @FindBy(xpath = "//label[text()=\"Name\"]/../../div[2]/input")
+    WebElement inputNameEmergencyContact;
+
+    @FindBy(xpath = "//label[text()=\"Relationship\"]/../../div[2]/input")
+    WebElement inputRelationshipEmergencyContact;
+
+    @FindBy(xpath = "//label[text()=\"Home Telephone\"]/../../div[2]/input")
+    WebElement inputPhoneEmergencyContact;
+
+    @FindBy(xpath = "//label[text()=\"Salary Component\"]/../../div[2]/input")
+    WebElement inputSalaryComponent;
+
+    @FindBy(xpath = "//label[text()=\"pim.amount\"]/../../div[2]/input")
+    WebElement inputPimAmount;
+
+    @FindBy(xpath = "//label[text()=\"Currency\"]/../../div[2]/div")
+    WebElement listBoxCurrency;
+
     @FindBy(xpath = "//button[text()=\" Save \"]")
     WebElement btnSaveEmployee;
 
     @FindBy(xpath = "//a[text()=\"Personal Details\"]")
     WebElement btnMenuPersonalDetails;
+
+    @FindBy(xpath = "//a[text()=\"Emergency Contacts\"]/..")
+    WebElement btnMenuEmergencyContact;
+
+    @FindBy(xpath = "//a[text()=\"Salary\"]/..")
+    WebElement btnMenuSalary;
+
+    @FindBy(xpath = "(//button[text()=\" Add \"])[1]")
+    WebElement btnAddEmergencyContact;
 
     @FindBy(id = "path0")
     WebElement btnDashboard;
@@ -109,6 +137,34 @@ public class MainPage extends WebDriverManager{
         inputFirstName.sendKeys(firstName);
     }
 
+    public void setInputSalaryComponent(String salary) throws InterruptedException {
+        logger.info("Buscando inputSalaryComponent");
+        waitForElementToBeVisible(inputSalaryComponent);
+        logger.info("Ingresando el siguiente salary " + salary);
+        inputSalaryComponent.sendKeys(salary);
+    }
+
+    public void setInputNameEmergencyContact(String firstName) throws InterruptedException {
+        logger.info("Buscando inputNameEmergencyContact");
+        waitForElementToBeVisible(inputNameEmergencyContact);
+        logger.info("Ingresando el siguiente firstName " + firstName);
+        inputNameEmergencyContact.sendKeys(firstName);
+    }
+
+    public void setInputRelationshipEmergencyContact(String firstName) throws InterruptedException {
+        logger.info("Buscando inputRelationshipEmergencyContact");
+        waitForElementToBeVisible(inputRelationshipEmergencyContact);
+        logger.info("Ingresando el siguiente firstName " + firstName);
+        inputRelationshipEmergencyContact.sendKeys(firstName);
+    }
+
+    public void setInputPhoneEmergencyContact(String phone) throws InterruptedException {
+        logger.info("Buscando inputPhoneEmergencyContact");
+        waitForElementToBeVisible(inputPhoneEmergencyContact);
+        logger.info("Ingresando el siguiente telefono " + phone);
+        inputPhoneEmergencyContact.sendKeys(phone);
+    }
+
     public void setInputLastName(String lastName) throws InterruptedException {
         logger.info("Buscando inputLastName");
         waitForElementToBeVisible(inputLastName);
@@ -122,6 +178,14 @@ public class MainPage extends WebDriverManager{
         waitForElementToBeVisible(inputMiddleName);
         logger.info("Ingresando el siguiente middleName " + middleName);
         inputMiddleName.sendKeys(middleName);
+    }
+
+    public void selectListBoxCurrency(String currency) throws InterruptedException {
+        logger.info("Buscando listBoxCurrency");
+        waitForElementToBeVisible(listBoxCurrency);
+        Select comboBox = new Select(listBoxCurrency);
+        logger.info("Seleccionando Chilean peso");
+        comboBox.selectByValue("Chilean peso");
     }
 
     public void clickFirstProductList() throws InterruptedException {
@@ -169,6 +233,27 @@ public class MainPage extends WebDriverManager{
         logger.info("Click en btnSaveEmployee");
         btnSaveEmployee.click();
         Thread.sleep(5000);
+    }
+
+    public void clickBtnEmergencyContact() throws InterruptedException {
+        waitForElementToBeVisible(btnMenuEmergencyContact);
+        logger.info("Click en btnMenuEmergencyContact");
+        btnMenuEmergencyContact.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickBtnSalary() throws InterruptedException {
+        waitForElementToBeVisible(btnMenuSalary);
+        logger.info("Click en btnMenuSalary");
+        btnMenuSalary.click();
+        Thread.sleep(2000);
+    }
+
+    public void clickBtnAddEmergencyContact() throws InterruptedException {
+        waitForElementToBeVisible(btnAddEmergencyContact);
+        logger.info("Click en btnAddEmergencyContact");
+        btnAddEmergencyContact.click();
+        Thread.sleep(2000);
     }
 
     public void clickBtnMenuPersonalDetails() throws InterruptedException {
