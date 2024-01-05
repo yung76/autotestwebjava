@@ -1,13 +1,17 @@
 package com.sample.pages;
 
+import com.sample.utils.RandomGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 
@@ -48,4 +52,29 @@ public class WebDriverManager {
             driver = null;
         }
     }
+
+    public void captureScreenshot() {
+        try {
+            // Convertir el controlador de WebDriver a TakesScreenshot
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            RandomGenerator randomGenerator = new RandomGenerator();
+
+            // Capturar la captura de pantalla como un archivo
+            File source = ts.getScreenshotAs(OutputType.FILE);
+
+            // Definir la ruta donde se guardará la captura de pantalla
+            File destino = new File("." + File.separator + "src"
+                    + File.separator + "test"
+                    + File.separator + "resources" + File.separator + "screenshot" + File.separator
+                    + "screenshot_" + randomGenerator.generateRandomText(4) + ".png");
+
+            // Copiar el archivo de origen al destino
+            FileUtils.copyFile(source, destino);
+
+            logger.info("Captura de pantalla tomada y guardada en: " + destino.getAbsolutePath());
+        } catch (Exception e) {
+            logger.error("Error al tomar la captura de pantalla: " + e.getMessage());
+        }
+    }
+
 }

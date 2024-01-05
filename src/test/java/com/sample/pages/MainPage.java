@@ -90,6 +90,9 @@ public class MainPage extends WebDriverManager{
     @FindBy(xpath = "(//button[text()=\" Add \"])[1]")
     WebElement btnAddEmergencyContact;
 
+    @FindBy(xpath = "(//div[@class=\"oxd-table-card\"])[2]")
+    WebElement lblFirstEmployeeList;
+
     @FindBy(id = "path0")
     WebElement btnDashboard;
 
@@ -260,6 +263,13 @@ public class MainPage extends WebDriverManager{
         waitForElementToBeVisible(btnMenuPersonalDetails, 5);
         logger.info("Click en btnMenuPersonalDetails");
         btnMenuPersonalDetails.click();
+        Thread.sleep(5000);
+    }
+
+    public void clickFirstListEmployee() throws InterruptedException {
+        waitForElementToBeVisible(lblFirstEmployeeList, 5);
+        logger.info("Click en lblFirstEmployeeList");
+        lblFirstEmployeeList.click();
         Thread.sleep(5000);
     }
 

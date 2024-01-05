@@ -24,7 +24,6 @@ public class MainSteps {
     private static final Logger logger =  LogManager.getLogger(MainSteps.class);
 
     private MainPage mainPage;
-    private Scenario scenario;
     private WebDriverManager webDriverManager;
 
     private WebDriver driver;
@@ -124,9 +123,17 @@ public class MainSteps {
        Assert.assertTrue("No se mostrado el home",mainPage.booleanBtnDashboard());
     }
 
+    @Then("select first employee of the list")
+    public void selectFirstEmployeeList() throws InterruptedException {
+        mainPage.clickFirstListEmployee();
+    }
+
     @After
-    public void closeApp() {
+    public void closeApp(Scenario scenario) {
         logger.info("Se cierra la Session");
+        if (scenario.isFailed()) {
+            mainPage.captureScreenshot();
+        }
         mainPage.quitDriver();
     }
 
